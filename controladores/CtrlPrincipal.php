@@ -5,7 +5,11 @@ class CtrlPrincipal extends Controlador{
     public function index(){
         # echo "Saludos desde CtrlPrincipal";
         $datos = array(
-            'nombres'=>"Walter "
+            'menu'=>array(
+                'CtrlPrincipal'=>'Inicio',
+                'CtrlEstado'=>'Estados'
+
+            )
         );
 
         $this->mostrar('principal.php',$datos);

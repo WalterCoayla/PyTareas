@@ -6,7 +6,21 @@
     <title>POO</title>
 </head>
 <body>
-    <h1>Hola Mundo</h1>
-    <h3>Saludos <?=isset($nombre)?$nombre:'';?></h3>
+    <h1>Opciones del Sistema</h1>
+    
+    <ul>
+        <?php foreach ($menu as $key => $value) { ?>
+
+        <li>
+            <a href="?ctrl=<?=$key?>"><?=$value?></a>
+        </li>
+
+        <?php
+            }
+        ?>
+        
+
+    </ul>
+    
 </body>
 </html>
