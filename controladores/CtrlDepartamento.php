@@ -1,7 +1,7 @@
 <?php
 require_once './core/Controlador.php';
-require_once './modelos/Estado.php';
-class CtrlEstado extends Controlador
+require_once './modelos/Departamento.php';
+class CtrlDepartamento extends Controlador
 {
     public function index(){
 
@@ -11,22 +11,23 @@ class CtrlEstado extends Controlador
     public function editar(){
         
         $id = $_GET['id'];
-        echo "Editando....".$id;
-        $obj= new Estado();
+        # echo "Editando....".$id;
+        $obj= new Departamento();
 
         $miObj = $obj->getBy('id',$id);
         # var_dump($miObj);exit;
         $datos = array(
-            'estado'=>$miObj['data'][0]
+            'departamento'=>$miObj['data'][0]
         );
         # var_dump($datos);exit;
-        $this->mostrar('estados/formulario.php',$datos);
+        $this->mostrar('departamentos/formulario.php',$datos);
     }
     public function guardar(){
         $id=$_POST['id'];
         $nombre=$_POST['nombre'];
+        $descripcion=$_POST['descripcion'];
 
-        $obj= new Estado($id, $nombre);
+        $obj= new Departamento($id, $nombre,$descripcion);
 
         if ($id==''){
             $respuesta = $obj->nuevo();
@@ -37,13 +38,13 @@ class CtrlEstado extends Controlador
         $this->listar();
     }
     public function nuevo(){
-        $this->mostrar('estados/formulario.php');
+        $this->mostrar('departamentos/formulario.php');
     }
 
     public function eliminar(){
 
         $id = $_GET['id'];
-        $obj= new Estado($id);
+        $obj= new Departamento($id);
 
         $respuesta = $obj->eliminar();
 
@@ -53,7 +54,7 @@ class CtrlEstado extends Controlador
 
     public function listar(){
 
-        $obj= new Estado();
+        $obj= new Departamento();
 
         $data = $obj->listar();
         
@@ -61,7 +62,7 @@ class CtrlEstado extends Controlador
             'data'=>$data['data']
         );
 
-        $this->mostrar('estados/mostrar.php',$datos);
+        $this->mostrar('departamentos/mostrar.php',$datos);
 
     }
 }

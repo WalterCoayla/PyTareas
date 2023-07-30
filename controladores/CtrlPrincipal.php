@@ -7,7 +7,9 @@ class CtrlPrincipal extends Controlador{
         $datos = array(
             'menu'=>array(
                 'CtrlPrincipal'=>'Inicio',
-                'CtrlEstado'=>'Estados'
+                'CtrlEstado'=>'Estados',
+                'CtrlDepartamento'=>'Departamentos',
+                'CtrlCargo'=>'Cargos'
 
             )
         );
