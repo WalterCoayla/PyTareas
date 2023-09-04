@@ -20,7 +20,7 @@ USE `bdTareas` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdTareas`.`cargos` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `dargo` VARCHAR(50) NULL,
+  `cargo` VARCHAR(50) NULL,
   `descripcion` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `bdTareas`.`empleados` (
   `clave` VARCHAR(50) NULL,
   `avatar` VARCHAR(50) NULL,
   `cargos_id` INT NOT NULL,
-  `empleados_id` INT NOT NULL,
+  `empleados_id` INT  NULL,
   `departamentos_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_empleados_cargos1_idx` (`cargos_id` ASC) ,
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `bdTareas`.`tareas` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `fecha_vence` DATETIME NULL,
-  `empleados_id` INT NOT NULL,
+  `empleados_id` INT  NULL,
   `estados_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_tareas_empleados1_idx` (`empleados_id` ASC) ,

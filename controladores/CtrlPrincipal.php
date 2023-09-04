@@ -9,7 +9,9 @@ class CtrlPrincipal extends Controlador{
                 'CtrlPrincipal'=>'Inicio',
                 'CtrlEstado'=>'Estados',
                 'CtrlDepartamento'=>'Departamentos',
-                'CtrlCargo'=>'Cargos'
+                'CtrlCargo'=>'Cargos',
+                'CtrlEmpleado'=>'Empleados',
+                'CtrlTarea'=>'Tareas',
 
             )
         );
