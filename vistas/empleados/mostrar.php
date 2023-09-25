@@ -31,8 +31,8 @@
             <td><?=$d['nombres']?></td>
             <td><?=$d['apellidos']?></td>
             <td><?=$d['email']?></td>
-            <td><?=$d['cargos_id']?></td>
-            <td><?=$d['departamentos_id']?></td>
+            <td><?=$d['cargo']?></td>
+            <td><?=$d['departamento']?></td>
             <td><?=$d['empleados_id']?></td>
 
             <td><a href="?ctrl=CtrlEmpleado&accion=editar&id=<?=$d['id']?>">Editar</a></td>

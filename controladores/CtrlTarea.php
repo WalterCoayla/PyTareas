@@ -1,6 +1,9 @@
 <?php
 require_once './core/Controlador.php';
 require_once './modelos/Tarea.php';
+require_once './modelos/Estado.php';
+require_once './modelos/Empleado.php';
+
 class CtrlTarea extends Controlador
 {
     public function index(){
@@ -9,6 +12,13 @@ class CtrlTarea extends Controlador
 
     }
     public function editar(){
+
+        $obj = new Estado;
+        $dataEstado = $obj->listar()['data'];
+
+        $obj = new Empleado;
+        $dataEmpleado = $obj->listar()['data'];
+
         
         $id = $_GET['id'];
         # echo "Editando....".$id;
@@ -17,7 +27,9 @@ class CtrlTarea extends Controlador
         $miObj = $obj->getBy('id',$id);
         # var_dump($miObj);exit;
         $datos = array(
-            'tarea'=>$miObj['data'][0]
+            'tarea'=>$miObj['data'][0],
+            'estados'=>$dataEstado,
+            'empleados'=>$dataEmpleado
         );
         # var_dump($datos);exit;
         $this->mostrar('tareas/formulario.php',$datos);
@@ -26,8 +38,10 @@ class CtrlTarea extends Controlador
         $id=$_POST['id'];
         $nombre=$_POST['nombre'];
         $fecha=$_POST['fecha'];
+        $empleado=$_POST['empleado'];
+        $estado=$_POST['estado'];
 
-        $obj= new Tarea($id, $nombre,$fecha);
+        $obj= new Tarea($id, $nombre,$fecha,$empleado,$estado);
 
         if ($id==''){
             $respuesta = $obj->nuevo();
@@ -38,7 +52,18 @@ class CtrlTarea extends Controlador
         $this->listar();
     }
     public function nuevo(){
-        $this->mostrar('tareas/formulario.php');
+        $obj = new Estado;
+        $dataEstado = $obj->listar()['data'];
+
+        $obj = new Empleado;
+        $dataEmpleado= $obj->listar()['data'];
+
+        $datos= [
+            'estados'=>$dataEstado,
+            'empleados'=>$dataEmpleado
+        ];
+
+        $this->mostrar('tareas/formulario.php',$datos);
     }
 
     public function eliminar(){

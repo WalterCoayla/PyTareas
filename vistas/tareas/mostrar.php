@@ -23,18 +23,21 @@
         </tr>
     <?php
         if (is_array($data))
-        foreach ($data as $d) { ?>
+        foreach ($data as $d) { 
+            $fecha = new DateTime($d['fecha_vence']);
+            $fechaVence = $fecha->format('d-m-Y');
+        ?>
         <tr>
             <td><?=$d['id']?></td>
             <td><?=$d['nombre']?></td>
-            <td><?=$d['fecha_vence']?></td>
-            <td><?=$d['empleados_id']?></td>
-            <td><?=$d['estados_id']?></td>
+            <td><?=$fechaVence?></td>
+            <td><?=$d['nombres'].' '. $d['apellidos']?></td>
+            <td><?=$d['estado']?></td>
             
-            <td><a href="?ctrl=CtrlTarea&accion=editar&id=<?=$d['id']?>">Editar</a></td>
-            <td><a href="?ctrl=CtrlTarea&accion=eliminar&id=<?=$d['id']?>">Eliminar</a></td>
-            <td><a href="?ctrl=CtrlTarea&accion=asignarTarea&id=<?=$d['id']?>">Asignar Tarea</a></td>
-            <td><a href="?ctrl=CtrlTarea&accion=verProgreso&id=<?=$d['id']?>">Ver Progreso</a></td>
+            <td><a title="Editar" href="?ctrl=CtrlTarea&accion=editar&id=<?=$d['id']?>">Editar</a></td>
+            <td><a title="Eliminar" href="?ctrl=CtrlTarea&accion=eliminar&id=<?=$d['id']?>">Eliminar</a></td>
+            <td><a title="Asignar Tarea" href="?ctrl=CtrlTarea&accion=asignarTarea&id=<?=$d['id']?>">Asignar Tarea</a></td>
+            <td><a title="Ver Progreso de Ejecución" href="?ctrl=CtrlTarea&accion=verProgreso&id=<?=$d['id']?>">Ver Progreso</a></td>
             
         </tr>
     

@@ -13,6 +13,8 @@ class Empleado extends Modelo{
 
     private $_tabla = 'empleados';
 
+    private $_vista = 'v_empleados';
+
     public function __construct($id=null, $nombres=null, $apellidos=null
                         , $email=null, $cargo=null, $departamento=null){
         $this->_id = $id;
@@ -26,6 +28,7 @@ class Empleado extends Modelo{
 
     }
     public function listar(){
+        $this->setTabla($this->_vista);
         return $this->getAll();
     }
     public function eliminar(){

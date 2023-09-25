@@ -32,9 +32,33 @@ $titulo = ($editar==1)?'Editar Empleado':'Nuevo empleado';
         <br>
         Email: <input class="form-control" type="text" name="email" value="<?=$email?>">
         <br>
-        Cargo: <input class="form-control" type="text" name="cargo" value="<?=$cargoId?>">
+        Cargo: 
+        
+        <select name="cargo" id="" class="form-control">
+            <?php 
+            if (is_array($cargos))
+            foreach ($cargos as $c) :
+                $selected = ($cargoId==$c['id'])?'selected':'';
+            ?>
+                <option <?=$selected?> value="<?=$c['id']?>"><?=$c['cargo']?></option>
+            <?php
+            endforeach
+             ?>
+        </select>
         <br>
-        Departamento: <input class="form-control" type="text" name="departamento" value="<?=$departamentoId?>">
+        Departamento: 
+        <select name="departamento" id="" class="form-control">
+            <?php 
+            if (is_array($departamentos))
+            foreach ($departamentos as $c) :
+                $selected = ($departamentoId==$c['id'])?'selected':'';
+            ?>
+                <option <?=$selected?> value="<?=$c['id']?>"><?=$c['departamento']?></option>
+            <?php
+            endforeach
+             ?>
+        </select>
+
         <br>
         <input class="form-control bg-primary" type="submit" value="Guardar">
     </form>

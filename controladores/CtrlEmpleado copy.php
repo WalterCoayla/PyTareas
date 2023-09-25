@@ -1,8 +1,6 @@
 <?php
 require_once './core/Controlador.php';
 require_once './modelos/Empleado.php';
-require_once './modelos/Cargo.php';
-require_once './modelos/Departamento.php';
 
 class CtrlEmpleado extends Controlador
 {
@@ -12,12 +10,6 @@ class CtrlEmpleado extends Controlador
 
     }
     public function editar(){
-
-        $obj = new Cargo;
-        $dataCargo = $obj->listar()['data'];
-
-        $obj = new Departamento;
-        $dataDpto = $obj->listar()['data'];
         
         $id = $_GET['id'];
         # echo "Editando....".$id;
@@ -26,9 +18,7 @@ class CtrlEmpleado extends Controlador
         $miObj = $obj->getBy('id',$id);
         # var_dump($miObj);exit;
         $datos = array(
-            'empleado'=>$miObj['data'][0],
-            'cargos'=>$dataCargo,
-            'departamentos'=>$dataDpto
+            'empleado'=>$miObj['data'][0]
         );
         # var_dump($datos);exit;
         $this->mostrar('empleados/formulario.php',$datos);
@@ -52,18 +42,7 @@ class CtrlEmpleado extends Controlador
         $this->listar();
     }
     public function nuevo(){
-        $obj = new Cargo;
-        $dataCargo = $obj->listar()['data'];
-
-        $obj = new Departamento;
-        $dataDpto = $obj->listar()['data'];
-
-        $datos = [
-            'cargos'=>$dataCargo,
-            'departamentos'=>$dataDpto
-        ];
-
-        $this->mostrar('empleados/formulario.php',$datos);
+        $this->mostrar('empleados/formulario.php');
     }
 
     public function eliminar(){
