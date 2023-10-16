@@ -1,5 +1,6 @@
 <?php
 require_once './core/Modelo.php';
+require_once 'Tarea.php';
 class Empleado extends Modelo{
     private $_id;
     private $_nombres;
@@ -59,5 +60,38 @@ class Empleado extends Modelo{
         return $this->update($wh, $datos);
 
     }
+    public function tareasSinAsignacion(){
+        $tarea = new Tarea();
+        return $tarea->tareasSinAsignacion();
+    }
+    public function asignarTarea($tareaID,$fechaVence){
+        $sql = "UPDATE tareas "
+        . " SET empleados_id=$this->_id,"
+        . " fecha_vence='$fechaVence'"
+        . " WHERE id=$tareaID";
+        $this->setSql($sql);
+        return $this->ejecutarSql();
+    }
+    public function misTareas(){
+        $sql = "Select * from tareas "
+            . " WHERE empleados_id=$this->_id";
+        $this->setSql($sql);
+        return $this->ejecutarSql();
+    }
+    public function getSupervisores(){
+        # Candidatos a Supervisor
+        # Todos menos yo
+        $sql = "Select * FROM $this->_tabla"
+            . " WHERE id != $this->_id";
+        $this->setSql($sql);
+        return $this->ejecutarSql();
+    }
+    public function setSupervisor($id){
+        $datos = array(
+            "empleados_id"=>"$id"
+        );
+        $wh = "id = $this->_id";
 
+        return $this->update($wh, $datos);
+    }
 }

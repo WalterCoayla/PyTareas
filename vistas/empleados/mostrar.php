@@ -25,7 +25,9 @@
         </tr>
     <?php
         if (is_array($data))
-        foreach ($data as $d) { ?>
+        foreach ($data as $d) { 
+        $empleado = $d['nombres'] .' '. $d['apellidos'];
+    ?>
         <tr>
             <td><?=$d['id']?></td>
             <td><?=$d['nombres']?></td>
@@ -33,12 +35,16 @@
             <td><?=$d['email']?></td>
             <td><?=$d['cargo']?></td>
             <td><?=$d['departamento']?></td>
-            <td><?=$d['empleados_id']?></td>
-
+            <td><?=$d['supervisor']?></td>
+            
             <td><a href="?ctrl=CtrlEmpleado&accion=editar&id=<?=$d['id']?>">Editar</a></td>
             <td><a href="?ctrl=CtrlEmpleado&accion=eliminar&id=<?=$d['id']?>">Eliminar</a></td>
-            <td><a href="?ctrl=CtrlEmpleado&accion=asignarTarea&id=<?=$d['id']?>">Asignar Tarea</a></td>
-            <td><a href="?ctrl=CtrlEmpleado&accion=asignarSupervisor&id=<?=$d['id']?>">Asignar Supervisor</a></td>
+            <td>
+                <a href="?ctrl=CtrlEmpleado&accion=misTareas&id=<?=$d['id']?>&empleado=<?=$empleado?>">
+                    Mis Tareas
+                </a>
+            </td>
+            <td><a href="?ctrl=CtrlEmpleado&accion=seleccionarSupervisor&id=<?=$d['id']?>">Asignar Supervisor</a></td>
             
         </tr>
     

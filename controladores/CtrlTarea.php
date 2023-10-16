@@ -90,4 +90,10 @@ class CtrlTarea extends Controlador
         $this->mostrar('tareas/mostrar.php',$datos);
 
     }
+    public function verProgreso(){
+        echo "Ver progreso...";
+    }
+    public function asignarTarea(){
+        echo "Asignando tarea";
+    }
 }

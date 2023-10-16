@@ -53,5 +53,30 @@ class Tarea extends Modelo{
             "estados_id"=>"$this->_estado"
         );
     }
+    public function tareasSinAsignacion() {
+        #Armamos la consulta para que nos devuelva las tareas SIN ASIGNACIÓN
+        # Es decir que su estado sea 1
+        $sql = "Select * from ". $this->_tabla .
+            " where estados_id=1";
 
+        $this->setSql($sql);
+        return $this->ejecutarSql();
+    }
+
+    public function asignarAEmpleado($idEmpleado){
+        $sql = "Update ". $this->_tabla
+        . " SET empleados_id=$idEmpleado
+            WHERE id=$this->id";
+
+        $this->setSql($sql);
+        return $this->ejecutarSql();
+    }
+
+    public function getTareasxEmp($id){
+        $sql = "Select * FROM ". $this->_vista
+                . " WHERE empleados_id=$id";
+
+        $this->setSql($sql);
+        return $this->ejecutarSql();
+    }
 }

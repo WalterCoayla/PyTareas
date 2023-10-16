@@ -90,4 +90,44 @@ class CtrlEmpleado extends Controlador
         $this->mostrar('empleados/mostrar.php',$datos);
 
     }
+    public function misTareas(){
+        require_once './modelos/Tarea.php';
+        $id = $_GET['id'];
+        $obj = new Tarea;
+        $respuesta= $obj->getTareasxEmp($id);
+        $datos = array(
+            'titulo'=>'Mis Tareas',
+            'nombre'=>$_GET['empleado'],
+            'data'=>$respuesta['data']
+        );
+
+        $this->mostrar('empleados/misTareas.php',$datos);
+    }
+    public function asignarTarea(){
+        echo "Asignando tarea";
+    }
+    public function nuevaTarea(){
+        echo "Asignar nueva tarea...";
+    }
+    public function seleccionarSupervisor(){
+        $obj= new Empleado($_GET['id']);
+
+        $respuesta = $obj->getSupervisores();
+        
+        $datos = array(
+            'data'=>$respuesta['data'],
+            'empleado'=>$_GET['id']
+        );
+
+        $this->mostrar('empleados/seleccionarSupervisor.php',$datos);
+    }
+    public function asignarSupervisor(){
+        $id = $_GET['id'];
+        $obj= new Empleado($id);
+        $idSupervisor=$_POST['supervisor'];
+        # var_dump($id);exit;
+        $respuesta = $obj->setSupervisor($idSupervisor);
+        $this->index();
+    }
+    
 }
