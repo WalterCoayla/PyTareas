@@ -66,7 +66,7 @@ class Tarea extends Modelo{
     public function asignarAEmpleado($idEmpleado){
         $sql = "Update ". $this->_tabla
         . " SET empleados_id=$idEmpleado
-            WHERE id=$this->id";
+            WHERE id=$this->_id";
 
         $this->setSql($sql);
         return $this->ejecutarSql();
@@ -79,4 +79,12 @@ class Tarea extends Modelo{
         $this->setSql($sql);
         return $this->ejecutarSql();
     }
+    public function tareasDisponibles(){
+        $sql = "Select * FROM ". $this->_vista
+                . " WHERE empleados_id is null";
+
+        $this->setSql($sql);
+        return $this->ejecutarSql();
+    }
+
 }

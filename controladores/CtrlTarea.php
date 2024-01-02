@@ -3,6 +3,7 @@ require_once './core/Controlador.php';
 require_once './modelos/Tarea.php';
 require_once './modelos/Estado.php';
 require_once './modelos/Empleado.php';
+require_once './modelos/Progreso.php';
 
 class CtrlTarea extends Controlador
 {
@@ -91,9 +92,40 @@ class CtrlTarea extends Controlador
 
     }
     public function verProgreso(){
-        echo "Ver progreso...";
+        $id = $_GET['id'];
+        $obj  = new Progreso();
+        $data = $obj->getProgresoXTarea($id);
+        # var_dump($data);exit;
+         $datos = array(
+            'data'=>$data['data']
+        );
+
+        $this->mostrar('tareas/mostrarProgreso.php',$datos);
+
     }
     public function asignarTarea(){
-        echo "Asignando tarea";
+        // echo "Asignando tarea<br>";
+        
+        // var_dump($_GET);
+        $obj = new Empleado;
+        $dataEmpleado = $obj->listar()['data'];
+
+        $datos = array(
+            'empleados'=>$dataEmpleado,
+            'tarea'=>$_GET['tarea'],
+            'idtarea'=>$_GET['id']
+        );
+
+        $this->mostrar('tareas/seleccionarEmpleado.php',$datos);
+
+    }
+    public function asignarTareaAEmpleado (){
+        // echo "Asignando tarea";
+       // var_dump($_POST);
+       $obj = new Tarea ($_POST['idTarea']);
+       $obj->asignarAEmpleado($_POST['idEmpleado']);
+
+        $this->listar();
+
     }
 }

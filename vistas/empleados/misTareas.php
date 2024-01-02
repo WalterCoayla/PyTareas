@@ -11,7 +11,7 @@
     <h1>Tareas</h1>
     <h3><?=isset($nombre)?$nombre:'Sin Empleado';?></h3>
 
-    <a href="?ctrl=CtrlEmpleado&accion=nuevaTarea">Nueva</a>
+    <a href="?ctrl=CtrlEmpleado&accion=nuevaTarea&id=<?=isset($id)?$id:'';?>">Nueva</a>
 
     <table class="table table-striped table-hover">
         <tr>

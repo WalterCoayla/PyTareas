@@ -95,9 +95,11 @@ class CtrlEmpleado extends Controlador
         $id = $_GET['id'];
         $obj = new Tarea;
         $respuesta= $obj->getTareasxEmp($id);
+        # var_dump($respuesta);exit;
         $datos = array(
             'titulo'=>'Mis Tareas',
             'nombre'=>$_GET['empleado'],
+            'id'=>$_GET['id'],
             'data'=>$respuesta['data']
         );
 
@@ -105,9 +107,25 @@ class CtrlEmpleado extends Controlador
     }
     public function asignarTarea(){
         echo "Asignando tarea";
+        $id = $_GET['id']; #Empleado
+        $idTarea = $_GET['idTarea']; #Empleado
+        $obj = new Tarea;
+        $respuesta = $obj->asignarTarea($idTarea,$id);
+        $this->nuevaTarea();
     }
     public function nuevaTarea(){
-        echo "Asignar nueva tarea...";
+        require_once './modelos/Tarea.php';
+        $id = $_GET['id']; #Empleado
+        $obj = new Tarea;
+        $tareasDisponibles = $obj->TareasDisponibles();
+        # var_dump($tareasDisponibles);exit;
+        $datos = array(
+            'titulo'=>'Mis Tareas',
+            'id'=>$id,
+            'data'=>$tareasDisponibles['data']
+        );
+
+        $this->mostrar('empleados/tareasDisponibles.php',$datos);
     }
     public function seleccionarSupervisor(){
         $obj= new Empleado($_GET['id']);
